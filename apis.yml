@@ -1,11 +1,19 @@
 aid: spring-cloud-config
 name: Spring Cloud Config
 description: >-
-  Spring Cloud Config provides server-side and client-side support for externalized configuration in a distributed system.
+  Spring Cloud Config provides server-side and client-side support for
+  externalized configuration in a distributed system, with a central place to
+  manage external properties for applications across all environments.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+  - Configuration Management
   - Microservices
+  - Spring
+  - Spring Cloud
+  - Java
+  - Distributed Systems
+  - Externalized Configuration
 url: >-
   https://raw.githubusercontent.com/api-evangelist/spring-cloud-config/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -15,14 +23,34 @@ apis:
   - aid: spring-cloud-config:spring-cloud-config
     name: Spring Cloud Config
     description: >-
-      Spring Cloud Config provides server-side and client-side support for externalized configuration in a distributed system.
-    humanURL: https://github.com/api-evangelist/spring-cloud-config
+      Spring Cloud Config provides server-side and client-side support for
+      externalized configuration in a distributed system, with a central place
+      to manage external properties for applications across all environments.
+    humanURL: https://spring.io/projects/spring-cloud-config
     tags:
+      - Configuration Management
       - Microservices
+      - Spring
+      - Spring Cloud
+      - Java
+      - Distributed Systems
+      - Externalized Configuration
     properties: []
 common:
   - type: Website
-    url: https://github.com/api-evangelist/spring-cloud-config
+    url: https://spring.io/projects/spring-cloud-config
+  - type: Documentation
+    url: https://docs.spring.io/spring-cloud-config/reference/
+  - type: Getting Started
+    url: https://spring.io/guides/gs/centralized-configuration/
+  - type: GitHub
+    url: https://github.com/spring-cloud/spring-cloud-config
+  - type: GitHub Org
+    url: https://github.com/spring-cloud
+  - type: Issues
+    url: https://github.com/spring-cloud/spring-cloud-config/issues
+  - type: Releases
+    url: https://github.com/spring-cloud/spring-cloud-config/releases
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
