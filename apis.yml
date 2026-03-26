@@ -35,7 +35,13 @@ apis:
       - Java
       - Distributed Systems
       - Externalized Configuration
-    properties: []
+    baseURL: http://localhost:8888
+    properties:
+      - type: Documentation
+        url: https://docs.spring.io/spring-cloud-config/reference/server/environment-repository.html
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/spring-cloud-config/refs/heads/main/openapi/spring-cloud-config-server-api.yml
 common:
   - type: Website
     url: https://spring.io/projects/spring-cloud-config

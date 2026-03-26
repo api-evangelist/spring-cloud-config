@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/spring-cloud-config/json-schema/config-server-configuration.json",
+  "title": "Spring Cloud Config Server Configuration",
+  "description": "JSON Schema for Spring Cloud Config Server application properties.",
+  "type": "object",
+  "properties": {
+    "spring": {
+      "type": "object",
+      "properties": {
+        "cloud": {
+          "type": "object",
+          "properties": {
+            "config": {
+              "type": "object",
+              "properties": {
+                "server": {
+                  "type": "object",
+                  "properties": {
+                    "git": {
+                      "$ref": "#/$defs/GitRepositoryConfig"
+                    },
+                    "native": {
+                      "type": "object",
+                      "properties": {
+                        "searchLocations": {
+                          "type": "array",
+                          "items": { "type": "string" },
+                          "description": "Search locations for native profile."
+                        }
+                      }
+                    },
+                    "vault": {
+                      "type": "object",
+                      "properties": {
+                        "host": { "type": "string" },
+                        "port": { "type": "integer", "default": 8200 },
+                        "scheme": { "type": "string", "default": "https" },
+                        "backend": { "type": "string", "default": "secret" },
+                        "profileSeparator": { "type": "string", "default": "," }
+                      }
+                    },
+                    "defaultLabel": {
+                      "type": "string",
+                      "description": "Default label to use when none specified."
+                    },
+                    "defaultProfile": {
+                      "type": "string",
+                      "default": "default",
+                      "description": "Default profile to use."
+                    },
+                    "encrypt": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean",
+                          "default": true,
+                          "description": "Enable decryption of properties."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "GitRepositoryConfig": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI of the Git repository."
+        },
+        "defaultLabel": {
+          "type": "string",
+          "description": "Default branch or tag."
+        },
+        "searchPaths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Search paths within the repository."
+        },
+        "username": {
+          "type": "string",
+          "description": "Git username for authentication."
+        },
+        "password": {
+          "type": "string",
+          "description": "Git password for authentication."
+        },
+        "cloneOnStart": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to clone repository on startup."
+        },
+        "timeout": {
+          "type": "integer",
+          "default": 5,
+          "description": "Timeout in seconds for obtaining HTTP/SSH connection."
+        },
+        "refreshRate": {
+          "type": "integer",
+          "default": 0,
+          "description": "Rate in seconds for refreshing the Git repository (0 = every request)."
+        },
+        "skipSslValidation": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to skip SSL certificate validation."
+        },
+        "repos": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/GitRepositoryConfig"
+          },
+          "description": "Pattern-matched repository configurations."
+        }
+      }
+    }
+  }
+}
