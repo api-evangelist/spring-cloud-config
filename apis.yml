@@ -8,12 +8,12 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Configuration Management
+  - Distributed Systems
+  - Externalized Configuration
+  - Java
   - Microservices
   - Spring
   - Spring Cloud
-  - Java
-  - Distributed Systems
-  - Externalized Configuration
 url: >-
   https://raw.githubusercontent.com/api-evangelist/spring-cloud-config/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -29,12 +29,12 @@ apis:
     humanURL: https://spring.io/projects/spring-cloud-config
     tags:
       - Configuration Management
+      - Distributed Systems
+      - Externalized Configuration
+      - Java
       - Microservices
       - Spring
       - Spring Cloud
-      - Java
-      - Distributed Systems
-      - Externalized Configuration
     baseURL: http://localhost:8888
     properties:
       - type: Documentation
