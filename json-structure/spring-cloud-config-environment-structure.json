@@ -1,0 +1,27 @@
+{
+  "name": "Spring Cloud Config Server",
+  "description": "Structure documentation for the Spring Cloud Config Server API response objects",
+  "version": "4.1.0",
+  "structures": [
+    {
+      "name": "Environment",
+      "description": "Configuration environment response containing all property sources for an application",
+      "fields": [
+        { "name": "name", "type": "string", "required": true, "description": "Application name" },
+        { "name": "profiles", "type": "array", "required": true, "description": "Active profiles" },
+        { "name": "label", "type": "string", "required": false, "description": "Git branch, tag, or commit hash" },
+        { "name": "version", "type": "string", "required": false, "description": "Git commit hash" },
+        { "name": "state", "type": "string", "required": false, "description": "Configuration state" },
+        { "name": "propertySources", "type": "array", "required": true, "description": "Ordered list of property sources" }
+      ]
+    },
+    {
+      "name": "PropertySource",
+      "description": "A single source of configuration properties",
+      "fields": [
+        { "name": "name", "type": "string", "required": true, "description": "Source identifier (git URL + file path)" },
+        { "name": "source", "type": "object", "required": true, "description": "Key-value configuration properties" }
+      ]
+    }
+  ]
+}

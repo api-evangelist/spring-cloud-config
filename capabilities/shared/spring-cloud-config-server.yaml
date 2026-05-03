@@ -1,0 +1,214 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Spring Cloud Config Server"
+  description: "HTTP resource-based API for externalized configuration management. Serves property sources organized by application name, profile, and label with encryption/decryption and webhook refresh support."
+  tags:
+    - Spring Cloud
+    - Configuration Management
+    - Distributed Systems
+    - Externalized Configuration
+    - Git
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SPRING_CONFIG_SERVER_URL: SPRING_CONFIG_SERVER_URL
+      SPRING_CONFIG_SERVER_USERNAME: SPRING_CONFIG_SERVER_USERNAME
+      SPRING_CONFIG_SERVER_PASSWORD: SPRING_CONFIG_SERVER_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: spring-cloud-config
+      baseUri: "{{SPRING_CONFIG_SERVER_URL}}"
+      description: "Spring Cloud Config Server API"
+      authentication:
+        type: basic
+        username: "{{SPRING_CONFIG_SERVER_USERNAME}}"
+        password: "{{SPRING_CONFIG_SERVER_PASSWORD}}"
+      resources:
+        - name: configuration
+          path: /{application}/{profile}
+          description: "Application configuration retrieval"
+          operations:
+            - name: get-environment
+              method: GET
+              description: "Get environment configuration for application and profile"
+              inputParameters:
+                - name: application
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application name"
+                - name: profile
+                  in: path
+                  type: string
+                  required: true
+                  description: "Active profile(s)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-environment-with-label
+              method: GET
+              description: "Get environment configuration with specific git label"
+              inputParameters:
+                - name: application
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application name"
+                - name: profile
+                  in: path
+                  type: string
+                  required: true
+                  description: "Active profile(s)"
+                - name: label
+                  in: path
+                  type: string
+                  required: true
+                  description: "Git branch, tag, or commit hash"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: encryption
+          path: /encrypt
+          description: "Value encryption"
+          operations:
+            - name: encrypt-value
+              method: POST
+              description: "Encrypt a plain text value"
+              body:
+                type: text
+                data: "{{tools.plaintext}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: check-encryption-status
+              method: GET
+              description: "Check encryption configuration status"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: monitoring
+          path: /monitor
+          description: "Webhook refresh notifications"
+          operations:
+            - name: trigger-refresh
+              method: POST
+              description: "Trigger configuration refresh from git webhook"
+              body:
+                type: json
+                data: "{{tools.payload}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8110
+      namespace: spring-cloud-config-api
+      resources:
+        - path: /v1/configuration/{application}/{profile}
+          name: configuration
+          description: "Application configuration retrieval"
+          operations:
+            - method: GET
+              name: get-configuration
+              description: "Get configuration for application and profile"
+              call: "spring-cloud-config.get-environment"
+              with:
+                application: "rest.application"
+                profile: "rest.profile"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/encrypt
+          name: encrypt
+          description: "Value encryption"
+          operations:
+            - method: POST
+              name: encrypt-value
+              description: "Encrypt a configuration value"
+              call: "spring-cloud-config.encrypt-value"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9110
+      namespace: spring-cloud-config-mcp
+      transport: http
+      tools:
+        - name: get-app-configuration
+          description: "Retrieve externalized configuration for a Spring Boot application from the Config Server for a specific profile"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "spring-cloud-config.get-environment"
+          with:
+            application: "tools.application"
+            profile: "tools.profile"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-app-configuration-by-label
+          description: "Retrieve configuration for a specific git branch, tag, or commit hash"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "spring-cloud-config.get-environment-with-label"
+          with:
+            application: "tools.application"
+            profile: "tools.profile"
+            label: "tools.label"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: encrypt-config-value
+          description: "Encrypt a sensitive configuration value for safe storage in git with {cipher} prefix"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "spring-cloud-config.encrypt-value"
+          with:
+            plaintext: "tools.plaintext"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-encryption-status
+          description: "Check whether the Config Server has encryption keys configured"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "spring-cloud-config.check-encryption-status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: trigger-config-refresh
+          description: "Trigger configuration refresh notification for git webhook events (GitHub, GitLab, Bitbucket)"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "spring-cloud-config.trigger-refresh"
+          with:
+            payload: "tools.payload"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,122 @@
+name: Spring Cloud Config Vocabulary
+description: Domain vocabulary and taxonomy for Spring Cloud Config externalized configuration management.
+version: "4.1.0"
+created: "2026-05-02"
+modified: "2026-05-02"
+url: https://spring.io/projects/spring-cloud-config
+
+terms:
+
+  - term: Config Server
+    definition: >-
+      The server-side component of Spring Cloud Config that exposes configuration properties
+      via an HTTP API. It reads properties from a backend repository (Git, SVN, or filesystem)
+      and serves them to Config Clients on demand.
+    category: Component
+    tags:
+      - Server
+      - Configuration
+
+  - term: Config Client
+    definition: >-
+      A Spring Boot application that consumes configuration from a Config Server at startup.
+      Uses the spring.cloud.config.uri property to locate the server and fetches configuration
+      for its application name and active profiles.
+    category: Component
+    tags:
+      - Client
+      - Configuration
+
+  - term: Environment Repository
+    definition: >-
+      The backend storage mechanism for the Config Server. Supports Git repositories
+      (including GitHub, GitLab, Bitbucket), SVN, HashiCorp Vault, Consul, and native
+      filesystem locations.
+    category: Backend
+    tags:
+      - Git
+      - Storage
+      - Repository
+
+  - term: Application Name
+    definition: >-
+      The spring.application.name value used as the primary key for configuration lookup.
+      The Config Server resolves property files matching the application name.
+    category: Configuration Routing
+    tags:
+      - Naming
+      - Routing
+
+  - term: Profile
+    definition: >-
+      The Spring active profile(s) used to resolve environment-specific configuration files.
+      Files are resolved in order: application.yml, {app}.yml, {app}-{profile}.yml.
+    category: Configuration Routing
+    tags:
+      - Environment
+      - Routing
+
+  - term: Label
+    definition: >-
+      A git branch, tag, or commit hash that determines which version of configuration
+      files to serve. Defaults to 'main' or 'master' for Git backends.
+    category: Configuration Routing
+    tags:
+      - Git
+      - Versioning
+
+  - term: Property Source
+    definition: >-
+      A single configuration file or location that contributes key-value pairs to the
+      resolved Environment. Multiple property sources are listed in priority order.
+    category: Configuration Model
+    tags:
+      - Properties
+      - Priority
+
+  - term: Cipher
+    definition: >-
+      An encrypted value stored in configuration using the {cipher} prefix notation.
+      The Config Server decrypts these values before serving them to clients.
+    category: Security
+    tags:
+      - Encryption
+      - Security
+
+  - term: Spring Cloud Bus
+    definition: >-
+      A messaging framework (using RabbitMQ or Kafka) that propagates configuration refresh
+      events across all Config Clients without requiring individual restarts.
+    category: Integration
+    tags:
+      - Messaging
+      - Refresh
+      - Bus
+
+  - term: Refresh Scope
+    definition: >-
+      A Spring bean scope (@RefreshScope) that marks beans to be re-initialized when a
+      configuration refresh event occurs, picking up new property values.
+    category: Runtime Refresh
+    tags:
+      - Bean
+      - Refresh
+      - Dynamic Configuration
+
+  - term: Bootstrap Context
+    definition: >-
+      The parent Spring ApplicationContext that initializes before the main application
+      context to load configuration from the Config Server before bean initialization.
+    category: Initialization
+    tags:
+      - Context
+      - Startup
+
+  - term: Native Profile
+    definition: >-
+      A Config Server backend that reads configuration files from the local filesystem
+      rather than a Git repository. Useful for development and testing.
+    category: Backend
+    tags:
+      - Filesystem
+      - Development

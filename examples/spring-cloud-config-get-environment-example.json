@@ -1,0 +1,58 @@
+{
+  "operation": "getEnvironmentWithLabel",
+  "method": "GET",
+  "path": "/{application}/{profile}/{label}",
+  "description": "Get application configuration from Config Server for a specific label",
+  "request": {
+    "pathParameters": {
+      "application": "payment-service",
+      "profile": "production",
+      "label": "main"
+    },
+    "headers": {
+      "Accept": "application/json",
+      "Authorization": "Basic dXNlcjpwYXNzd29yZA=="
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "payment-service",
+      "profiles": ["production"],
+      "label": "main",
+      "version": "a4f3b9c1e2d8f7a6b5c4d3e2f1a9b8c7",
+      "state": null,
+      "propertySources": [
+        {
+          "name": "https://github.com/example-org/config-repo/payment-service-production.yml",
+          "source": {
+            "server.port": 8082,
+            "spring.datasource.url": "jdbc:postgresql://prod-db:5432/payments",
+            "spring.datasource.username": "payments_user",
+            "payment.gateway.url": "https://api.payment-provider.com/v1",
+            "payment.gateway.timeout": 30000,
+            "management.endpoints.web.exposure.include": "health,metrics,info"
+          }
+        },
+        {
+          "name": "https://github.com/example-org/config-repo/application-production.yml",
+          "source": {
+            "logging.level.root": "WARN",
+            "spring.redis.host": "prod-redis",
+            "spring.redis.port": 6379
+          }
+        },
+        {
+          "name": "https://github.com/example-org/config-repo/application.yml",
+          "source": {
+            "management.endpoint.health.show-details": "when-authorized",
+            "spring.jackson.default-property-inclusion": "non_null"
+          }
+        }
+      ]
+    }
+  }
+}

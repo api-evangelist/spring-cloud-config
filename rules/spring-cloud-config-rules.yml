@@ -1,0 +1,78 @@
+extends:
+  - spectral:oas
+
+rules:
+
+  spring-cloud-config-operation-id-camel-case:
+    description: Operation IDs must be camelCase
+    message: "Operation ID '{{value}}' must use camelCase"
+    given: "$.paths[*][get,post,put,delete,patch].operationId"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  spring-cloud-config-summary-title-case:
+    description: All operation summaries must use Title Case
+    message: "Summary '{{value}}' should use Title Case"
+    given: "$.paths[*][get,post,put,delete,patch].summary"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  spring-cloud-config-tags-required:
+    description: All operations must declare at least one tag
+    message: "Operation is missing tags"
+    given: "$.paths[*][get,post,put,delete,patch]"
+    severity: error
+    then:
+      field: tags
+      function: truthy
+
+  spring-cloud-config-tags-title-case:
+    description: Tags must be Title Case
+    message: "Tag '{{value}}' must use Title Case"
+    given: "$.paths[*][get,post,put,delete,patch].tags[*]"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z ]+$"
+
+  spring-cloud-config-path-parameters-described:
+    description: All path parameters must have a description
+    message: "Path parameter '{{value}}' is missing a description"
+    given: "$.paths[*][get,post,put,delete,patch].parameters[?(@.in == 'path')]"
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  spring-cloud-config-response-content-type:
+    description: GET operations returning JSON must specify content type
+    message: "GET operation should specify application/json or application/x-yaml response content type"
+    given: "$.paths[*].get.responses.200"
+    severity: warn
+    then:
+      field: content
+      function: truthy
+
+  spring-cloud-config-security-defined:
+    description: API must define security schemes
+    message: "API must define at least one security scheme for Config Server authentication"
+    given: "$.components.securitySchemes"
+    severity: warn
+    then:
+      function: truthy
+
+  spring-cloud-config-servers-defined:
+    description: At least one server must be defined
+    message: "OpenAPI spec must define at least one server"
+    given: "$"
+    severity: error
+    then:
+      field: servers
+      function: truthy

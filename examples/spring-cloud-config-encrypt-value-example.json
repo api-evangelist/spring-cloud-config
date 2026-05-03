@@ -1,0 +1,21 @@
+{
+  "operation": "encrypt",
+  "method": "POST",
+  "path": "/encrypt",
+  "description": "Encrypt a configuration value using the Config Server's encryption key",
+  "request": {
+    "headers": {
+      "Content-Type": "text/plain",
+      "Authorization": "Basic dXNlcjpwYXNzd29yZA=="
+    },
+    "body": "mysecretdatabasepassword"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/plain"
+    },
+    "body": "7b3a8f2e1d4c6b9a0e5f2c8d3a6b1e4f7c9a2b5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5"
+  },
+  "usage": "Use the encrypted value in configuration files with the {cipher} prefix: spring.datasource.password: '{cipher}7b3a8f2e...'"
+}

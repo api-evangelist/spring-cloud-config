@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/spring-cloud-config/json-schema/spring-cloud-config-environment-schema.json",
+  "title": "Spring Cloud Config Environment",
+  "description": "JSON Schema for the Spring Cloud Config Server environment response object returned by /{application}/{profile}.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Application name"
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Active profiles for this environment"
+    },
+    "label": {
+      "type": ["string", "null"],
+      "description": "Label (branch, tag, or commit hash) from the backing repository"
+    },
+    "version": {
+      "type": ["string", "null"],
+      "description": "Git commit hash or version identifier"
+    },
+    "state": {
+      "type": ["string", "null"],
+      "description": "State of the configuration"
+    },
+    "propertySources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PropertySource"
+      },
+      "description": "Ordered list of property sources contributing to this environment"
+    }
+  },
+  "required": ["name", "profiles", "propertySources"],
+  "$defs": {
+    "PropertySource": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Identifier of the property source (e.g., git URL + path)"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Key-value configuration properties from this source"
+        }
+      },
+      "required": ["name", "source"]
+    }
+  }
+}
