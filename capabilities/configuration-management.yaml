@@ -1,149 +1,241 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Spring Cloud Config Configuration Management"
-  description: "Unified capability for centralized configuration management across distributed microservices. Enables retrieving externalized configuration, managing encryption, and triggering runtime refresh for DevOps and platform engineering workflows."
+  label: Spring Cloud Config Configuration Management
+  description: Unified capability for centralized configuration management across distributed microservices. Enables retrieving
+    externalized configuration, managing encryption, and triggering runtime refresh for DevOps and platform engineering workflows.
   tags:
-    - Spring Cloud
-    - Configuration Management
-    - Distributed Systems
-    - GitOps
-    - Platform Engineering
-    - DevOps
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - Spring Cloud
+  - Configuration Management
+  - Distributed Systems
+  - GitOps
+  - Platform Engineering
+  - DevOps
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      SPRING_CONFIG_SERVER_URL: SPRING_CONFIG_SERVER_URL
-      SPRING_CONFIG_SERVER_USERNAME: SPRING_CONFIG_SERVER_USERNAME
-      SPRING_CONFIG_SERVER_PASSWORD: SPRING_CONFIG_SERVER_PASSWORD
-
+- namespace: env
+  keys:
+    SPRING_CONFIG_SERVER_URL: SPRING_CONFIG_SERVER_URL
+    SPRING_CONFIG_SERVER_USERNAME: SPRING_CONFIG_SERVER_USERNAME
+    SPRING_CONFIG_SERVER_PASSWORD: SPRING_CONFIG_SERVER_PASSWORD
 capability:
   consumes:
-    - import: spring-cloud-config
-      location: ./shared/spring-cloud-config-server.yaml
-
+  - type: http
+    namespace: spring-cloud-config
+    baseUri: '{{SPRING_CONFIG_SERVER_URL}}'
+    description: Spring Cloud Config Server API
+    authentication:
+      type: basic
+      username: '{{SPRING_CONFIG_SERVER_USERNAME}}'
+      password: '{{SPRING_CONFIG_SERVER_PASSWORD}}'
+    resources:
+    - name: configuration
+      path: /{application}/{profile}
+      description: Application configuration retrieval
+      operations:
+      - name: get-environment
+        method: GET
+        description: Get environment configuration for application and profile
+        inputParameters:
+        - name: application
+          in: path
+          type: string
+          required: true
+          description: Application name
+        - name: profile
+          in: path
+          type: string
+          required: true
+          description: Active profile(s)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-environment-with-label
+        method: GET
+        description: Get environment configuration with specific git label
+        inputParameters:
+        - name: application
+          in: path
+          type: string
+          required: true
+          description: Application name
+        - name: profile
+          in: path
+          type: string
+          required: true
+          description: Active profile(s)
+        - name: label
+          in: path
+          type: string
+          required: true
+          description: Git branch, tag, or commit hash
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: encryption
+      path: /encrypt
+      description: Value encryption
+      operations:
+      - name: encrypt-value
+        method: POST
+        description: Encrypt a plain text value
+        body:
+          type: text
+          data: '{{tools.plaintext}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: check-encryption-status
+        method: GET
+        description: Check encryption configuration status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: monitoring
+      path: /monitor
+      description: Webhook refresh notifications
+      operations:
+      - name: trigger-refresh
+        method: POST
+        description: Trigger configuration refresh from git webhook
+        body:
+          type: json
+          data: '{{tools.payload}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: configuration-management-api
-      description: "Unified REST API for distributed configuration management."
-      resources:
-        - path: /v1/configuration/{application}/{profile}
-          name: configuration
-          description: "Application configuration by profile"
-          operations:
-            - method: GET
-              name: get-configuration
-              description: "Get externalized configuration for application and profile"
-              call: "spring-cloud-config.get-environment"
-              with:
-                application: "rest.application"
-                profile: "rest.profile"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/configuration/{application}/{profile}/{label}
-          name: labeled-configuration
-          description: "Application configuration by profile and git label"
-          operations:
-            - method: GET
-              name: get-configuration-by-label
-              description: "Get configuration for specific branch/tag/commit"
-              call: "spring-cloud-config.get-environment-with-label"
-              with:
-                application: "rest.application"
-                profile: "rest.profile"
-                label: "rest.label"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/secrets/encrypt
-          name: secret-encryption
-          description: "Configuration secret encryption"
-          operations:
-            - method: POST
-              name: encrypt-secret
-              description: "Encrypt a configuration secret for safe git storage"
-              call: "spring-cloud-config.encrypt-value"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/refresh
-          name: config-refresh
-          description: "Configuration refresh trigger"
-          operations:
-            - method: POST
-              name: trigger-refresh
-              description: "Trigger configuration refresh via webhook"
-              call: "spring-cloud-config.trigger-refresh"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9080
-      namespace: configuration-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted distributed configuration management."
-      tools:
-        - name: fetch-service-configuration
-          description: "Fetch the complete externalized configuration for a microservice from the central Config Server, resolving all property sources (git, environment, defaults)"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "spring-cloud-config.get-environment"
-          with:
-            application: "tools.application"
-            profile: "tools.profile"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: fetch-configuration-by-branch
-          description: "Fetch configuration for a microservice pinned to a specific git branch, tag, or commit hash for canary or blue-green deployment validation"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "spring-cloud-config.get-environment-with-label"
-          with:
-            application: "tools.application"
-            profile: "tools.profile"
-            label: "tools.label"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: encrypt-sensitive-value
-          description: "Encrypt a sensitive configuration value (password, API key, token) for secure storage in git with {cipher} prefix notation"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "spring-cloud-config.encrypt-value"
-          with:
-            plaintext: "tools.plaintext"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: verify-encryption-ready
-          description: "Verify that the Config Server has encryption keys configured and is ready for {cipher} property decryption"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "spring-cloud-config.check-encryption-status"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: notify-config-change
-          description: "Send a configuration change notification to trigger Spring Cloud Bus refresh events across all subscribed microservices"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "spring-cloud-config.trigger-refresh"
-          with:
-            payload: "tools.webhookPayload"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: configuration-management-api
+    description: Unified REST API for distributed configuration management.
+    resources:
+    - path: /v1/configuration/{application}/{profile}
+      name: configuration
+      description: Application configuration by profile
+      operations:
+      - method: GET
+        name: get-configuration
+        description: Get externalized configuration for application and profile
+        call: spring-cloud-config.get-environment
+        with:
+          application: rest.application
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configuration/{application}/{profile}/{label}
+      name: labeled-configuration
+      description: Application configuration by profile and git label
+      operations:
+      - method: GET
+        name: get-configuration-by-label
+        description: Get configuration for specific branch/tag/commit
+        call: spring-cloud-config.get-environment-with-label
+        with:
+          application: rest.application
+          profile: rest.profile
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secrets/encrypt
+      name: secret-encryption
+      description: Configuration secret encryption
+      operations:
+      - method: POST
+        name: encrypt-secret
+        description: Encrypt a configuration secret for safe git storage
+        call: spring-cloud-config.encrypt-value
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/refresh
+      name: config-refresh
+      description: Configuration refresh trigger
+      operations:
+      - method: POST
+        name: trigger-refresh
+        description: Trigger configuration refresh via webhook
+        call: spring-cloud-config.trigger-refresh
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9080
+    namespace: configuration-management-mcp
+    transport: http
+    description: MCP server for AI-assisted distributed configuration management.
+    tools:
+    - name: fetch-service-configuration
+      description: Fetch the complete externalized configuration for a microservice from the central Config Server, resolving
+        all property sources (git, environment, defaults)
+      hints:
+        readOnly: true
+        openWorld: false
+      call: spring-cloud-config.get-environment
+      with:
+        application: tools.application
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-configuration-by-branch
+      description: Fetch configuration for a microservice pinned to a specific git branch, tag, or commit hash for canary
+        or blue-green deployment validation
+      hints:
+        readOnly: true
+        openWorld: false
+      call: spring-cloud-config.get-environment-with-label
+      with:
+        application: tools.application
+        profile: tools.profile
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: encrypt-sensitive-value
+      description: Encrypt a sensitive configuration value (password, API key, token) for secure storage in git with {cipher}
+        prefix notation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: spring-cloud-config.encrypt-value
+      with:
+        plaintext: tools.plaintext
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: verify-encryption-ready
+      description: Verify that the Config Server has encryption keys configured and is ready for {cipher} property decryption
+      hints:
+        readOnly: true
+        openWorld: false
+      call: spring-cloud-config.check-encryption-status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: notify-config-change
+      description: Send a configuration change notification to trigger Spring Cloud Bus refresh events across all subscribed
+        microservices
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: spring-cloud-config.trigger-refresh
+      with:
+        payload: tools.webhookPayload
+      outputParameters:
+      - type: object
+        mapping: $.
