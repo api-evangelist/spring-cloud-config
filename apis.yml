@@ -59,17 +59,17 @@ common:
     url: https://spring.io/projects/spring-cloud-config
   - type: Documentation
     url: https://docs.spring.io/spring-cloud-config/reference/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://spring.io/guides/gs/centralized-configuration/
   - type: GitHub
     url: https://github.com/spring-cloud/spring-cloud-config
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/spring-cloud
   - type: Issues
     url: https://github.com/spring-cloud/spring-cloud-config/issues
   - type: Releases
     url: https://github.com/spring-cloud/spring-cloud-config/releases
-  - type: Stack Overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/spring-cloud-config
   - type: Maven Repository
     url: https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-server
