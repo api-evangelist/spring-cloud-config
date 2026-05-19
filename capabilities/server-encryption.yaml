@@ -1,0 +1,154 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Spring Cloud Config Server API — Encryption
+  description: 'Spring Cloud Config Server API — Encryption. 3 operations. Lead operation: Decrypt a value. Self-contained
+    Naftiko capability covering one Spring Cloud Config business surface.'
+  tags:
+  - Spring Cloud Config
+  - Encryption
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPRING_CLOUD_CONFIG_API_KEY: SPRING_CLOUD_CONFIG_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-encryption
+    baseUri: http://localhost:8888
+    description: Spring Cloud Config Server API — Encryption business capability. Self-contained, no shared references.
+    resources:
+    - name: decrypt
+      path: /decrypt
+      operations:
+      - name: decrypt
+        method: POST
+        description: Decrypt a value
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: encrypt
+      path: /encrypt
+      operations:
+      - name: encrypt
+        method: POST
+        description: Encrypt a value
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: encrypt-status
+      path: /encrypt/status
+      operations:
+      - name: encryptionstatus
+        method: GET
+        description: Check encryption status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SPRING_CLOUD_CONFIG_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: server-encryption-rest
+    port: 8080
+    description: REST adapter for Spring Cloud Config Server API — Encryption. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/decrypt
+      name: decrypt
+      description: REST surface for decrypt.
+      operations:
+      - method: POST
+        name: decrypt
+        description: Decrypt a value
+        call: server-encryption.decrypt
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/encrypt
+      name: encrypt
+      description: REST surface for encrypt.
+      operations:
+      - method: POST
+        name: encrypt
+        description: Encrypt a value
+        call: server-encryption.encrypt
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/encrypt/status
+      name: encrypt-status
+      description: REST surface for encrypt-status.
+      operations:
+      - method: GET
+        name: encryptionstatus
+        description: Check encryption status
+        call: server-encryption.encryptionstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-encryption-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Spring Cloud Config Server API — Encryption. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: decrypt-value
+      description: Decrypt a value
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-encryption.decrypt
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: encrypt-value
+      description: Encrypt a value
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-encryption.encrypt
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-encryption-status
+      description: Check encryption status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-encryption.encryptionstatus
+      outputParameters:
+      - type: object
+        mapping: $.

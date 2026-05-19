@@ -1,0 +1,443 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Spring Cloud Config Server API — Configuration
+  description: 'Spring Cloud Config Server API — Configuration. 8 operations. Lead operation: Get configuration as JSON. Self-contained
+    Naftiko capability covering one Spring Cloud Config business surface.'
+  tags:
+  - Spring Cloud Config
+  - Configuration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPRING_CLOUD_CONFIG_API_KEY: SPRING_CLOUD_CONFIG_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-configuration
+    baseUri: http://localhost:8888
+    description: Spring Cloud Config Server API — Configuration business capability. Self-contained, no shared references.
+    resources:
+    - name: application}-{profile}.json
+      path: /{application}-{profile}.json
+      operations:
+      - name: getconfigjson
+        method: GET
+        description: Get configuration as JSON
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: profile
+          in: path
+          type: string
+          required: true
+    - name: application}-{profile}.properties
+      path: /{application}-{profile}.properties
+      operations:
+      - name: getconfigproperties
+        method: GET
+        description: Get configuration as properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: profile
+          in: path
+          type: string
+          required: true
+    - name: application}-{profile}.yml
+      path: /{application}-{profile}.yml
+      operations:
+      - name: getconfigyaml
+        method: GET
+        description: Get configuration as YAML
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: profile
+          in: path
+          type: string
+          required: true
+    - name: application-profile
+      path: /{application}/{profile}
+      operations:
+      - name: getenvironment
+        method: GET
+        description: Get environment configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: application
+          in: path
+          type: string
+          description: Application name
+          required: true
+        - name: profile
+          in: path
+          type: string
+          description: Active profile(s), comma-separated
+          required: true
+    - name: application-profile-label
+      path: /{application}/{profile}/{label}
+      operations:
+      - name: getenvironmentwithlabel
+        method: GET
+        description: Get environment configuration with label
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: application
+          in: path
+          type: string
+          description: Application name
+          required: true
+        - name: profile
+          in: path
+          type: string
+          description: Active profile(s), comma-separated
+          required: true
+        - name: label
+          in: path
+          type: string
+          description: Branch, tag, or commit hash
+          required: true
+    - name: label-application}-{profile}.json
+      path: /{label}/{application}-{profile}.json
+      operations:
+      - name: getconfigjsonwithlabel
+        method: GET
+        description: Get configuration as JSON with label
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: label
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: profile
+          in: path
+          type: string
+          required: true
+    - name: label-application}-{profile}.properties
+      path: /{label}/{application}-{profile}.properties
+      operations:
+      - name: getconfigpropertieswithlabel
+        method: GET
+        description: Get configuration as properties with label
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: label
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: profile
+          in: path
+          type: string
+          required: true
+    - name: label-application}-{profile}.yml
+      path: /{label}/{application}-{profile}.yml
+      operations:
+      - name: getconfigyamlwithlabel
+        method: GET
+        description: Get configuration as YAML with label
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: label
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: profile
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SPRING_CLOUD_CONFIG_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: server-configuration-rest
+    port: 8080
+    description: REST adapter for Spring Cloud Config Server API — Configuration. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/application-profile-json
+      name: application-profile-json
+      description: REST surface for application}-{profile}.json.
+      operations:
+      - method: GET
+        name: getconfigjson
+        description: Get configuration as JSON
+        call: server-configuration.getconfigjson
+        with:
+          application: rest.application
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/application-profile-properties
+      name: application-profile-properties
+      description: REST surface for application}-{profile}.properties.
+      operations:
+      - method: GET
+        name: getconfigproperties
+        description: Get configuration as properties
+        call: server-configuration.getconfigproperties
+        with:
+          application: rest.application
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/application-profile-yml
+      name: application-profile-yml
+      description: REST surface for application}-{profile}.yml.
+      operations:
+      - method: GET
+        name: getconfigyaml
+        description: Get configuration as YAML
+        call: server-configuration.getconfigyaml
+        with:
+          application: rest.application
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{application}/{profile}
+      name: application-profile
+      description: REST surface for application-profile.
+      operations:
+      - method: GET
+        name: getenvironment
+        description: Get environment configuration
+        call: server-configuration.getenvironment
+        with:
+          application: rest.application
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{application}/{profile}/{label}
+      name: application-profile-label
+      description: REST surface for application-profile-label.
+      operations:
+      - method: GET
+        name: getenvironmentwithlabel
+        description: Get environment configuration with label
+        call: server-configuration.getenvironmentwithlabel
+        with:
+          application: rest.application
+          profile: rest.profile
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{label}/application-profile-json
+      name: label-application-profile-json
+      description: REST surface for label-application}-{profile}.json.
+      operations:
+      - method: GET
+        name: getconfigjsonwithlabel
+        description: Get configuration as JSON with label
+        call: server-configuration.getconfigjsonwithlabel
+        with:
+          label: rest.label
+          application: rest.application
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{label}/application-profile-properties
+      name: label-application-profile-properties
+      description: REST surface for label-application}-{profile}.properties.
+      operations:
+      - method: GET
+        name: getconfigpropertieswithlabel
+        description: Get configuration as properties with label
+        call: server-configuration.getconfigpropertieswithlabel
+        with:
+          label: rest.label
+          application: rest.application
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{label}/application-profile-yml
+      name: label-application-profile-yml
+      description: REST surface for label-application}-{profile}.yml.
+      operations:
+      - method: GET
+        name: getconfigyamlwithlabel
+        description: Get configuration as YAML with label
+        call: server-configuration.getconfigyamlwithlabel
+        with:
+          label: rest.label
+          application: rest.application
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Spring Cloud Config Server API — Configuration. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-configuration-json
+      description: Get configuration as JSON
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-configuration.getconfigjson
+      with:
+        application: tools.application
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-configuration-properties
+      description: Get configuration as properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-configuration.getconfigproperties
+      with:
+        application: tools.application
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-configuration-yaml
+      description: Get configuration as YAML
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-configuration.getconfigyaml
+      with:
+        application: tools.application
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-configuration
+      description: Get environment configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-configuration.getenvironment
+      with:
+        application: tools.application
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-configuration-label
+      description: Get environment configuration with label
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-configuration.getenvironmentwithlabel
+      with:
+        application: tools.application
+        profile: tools.profile
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-configuration-json-label
+      description: Get configuration as JSON with label
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-configuration.getconfigjsonwithlabel
+      with:
+        label: tools.label
+        application: tools.application
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-configuration-properties-label
+      description: Get configuration as properties with label
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-configuration.getconfigpropertieswithlabel
+      with:
+        label: tools.label
+        application: tools.application
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-configuration-yaml-label
+      description: Get configuration as YAML with label
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-configuration.getconfigyamlwithlabel
+      with:
+        label: tools.label
+        application: tools.application
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
