@@ -1,0 +1,348 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Spring Cloud Config Server API",
+    "version": "4.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get environment configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:application/:profile",
+            "params": [
+              {
+                "name": "application",
+                "value": "",
+                "type": "path",
+                "description": "Application name"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path",
+                "description": "Active profile(s), comma-separated"
+              }
+            ]
+          },
+          "docs": "Returns the Environment object containing property sources for the given application and profile. Uses the default label (usually master/main)."
+        },
+        {
+          "info": {
+            "name": "Get environment configuration with label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:application/:profile/:label",
+            "params": [
+              {
+                "name": "application",
+                "value": "",
+                "type": "path",
+                "description": "Application name"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path",
+                "description": "Active profile(s), comma-separated"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "path",
+                "description": "Branch, tag, or commit hash"
+              }
+            ]
+          },
+          "docs": "Returns the Environment for the given application, profile, and label. Label typically corresponds to a git branch, tag, or commit hash."
+        },
+        {
+          "info": {
+            "name": "Get configuration as YAML",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:application-:profile.yml",
+            "params": [
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the configuration as a YAML document."
+        },
+        {
+          "info": {
+            "name": "Get configuration as properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:application-:profile.properties",
+            "params": [
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the configuration as a Java properties file."
+        },
+        {
+          "info": {
+            "name": "Get configuration as JSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:application-:profile.json",
+            "params": [
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the configuration as a JSON document."
+        },
+        {
+          "info": {
+            "name": "Get configuration as YAML with label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:label/:application-:profile.yml",
+            "params": [
+              {
+                "name": "label",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns YAML configuration for a specific label (branch/tag)."
+        },
+        {
+          "info": {
+            "name": "Get configuration as properties with label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:label/:application-:profile.properties",
+            "params": [
+              {
+                "name": "label",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns properties configuration for a specific label."
+        },
+        {
+          "info": {
+            "name": "Get configuration as JSON with label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:label/:application-:profile.json",
+            "params": [
+              {
+                "name": "label",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns JSON configuration for a specific label."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a resource file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/:application/:profile/:label/:path",
+            "params": [
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Path to the resource file in the repository"
+              }
+            ]
+          },
+          "docs": "Serves a plain text resource file from the configuration repository (e.g., nginx.conf, logback.xml). The path is resolved relative to the repository root for the specified label."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Encryption",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Encrypt a value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8888/encrypt"
+          },
+          "docs": "Encrypts a plain text value using the server's configured encryption key. Requires spring.cloud.config.server.encrypt.enabled=true."
+        },
+        {
+          "info": {
+            "name": "Decrypt a value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8888/decrypt"
+          },
+          "docs": "Decrypts a cipher text value using the server's configured encryption key."
+        },
+        {
+          "info": {
+            "name": "Check encryption status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/encrypt/status"
+          },
+          "docs": "Returns the status of the encryption configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Trigger configuration refresh notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8888/monitor",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "File path pattern to match"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accepts webhook notifications from git hosting providers (GitHub, GitLab, Bitbucket) and triggers a Spring Cloud Bus refresh event."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
