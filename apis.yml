@@ -4,7 +4,7 @@ description: >-
   Spring Cloud Config provides server-side and client-side support for externalized configuration in a distributed
   system. It offers a central place to manage external properties for applications across all environments, backed by
   Git, SVN, or filesystem repositories with support for encryption, decryption, and runtime refresh.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://spring.io/projects/spring-cloud-config
 created: '2026-03-26'
 modified: '2026-05-19'
