@@ -63,7 +63,7 @@ common:
     url: https://github.com/spring-cloud
   - type: Issues
     url: https://github.com/spring-cloud/spring-cloud-config/issues
-  - type: Releases
+  - type: ReleaseNotes
     url: https://github.com/spring-cloud/spring-cloud-config/releases
   - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/spring-cloud-config
