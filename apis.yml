@@ -51,6 +51,14 @@ apis:
       - type: SpectralRules
         url: rules/spring-cloud-config-rules.yml
 common:
+  - type: VulnerabilityDisclosure
+    url: security/spring-cloud-config-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/spring-cloud-config-domain-security.yml
+  - type: Authentication
+    url: authentication/spring-cloud-config-authentication.yml
+  - url: https://spring.io/blog.atom
+    type: Blog
   - type: Website
     url: https://spring.io/projects/spring-cloud-config
   - type: Documentation

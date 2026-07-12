@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/spring-cloud-config-server-api.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/spring-cloud-config-server-api.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/spring-cloud-config-server-api.yml
