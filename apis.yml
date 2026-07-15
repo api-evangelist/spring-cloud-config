@@ -51,6 +51,8 @@ apis:
       - type: SpectralRules
         url: rules/spring-cloud-config-rules.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/spring-cloud-config-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/spring-cloud-config-vulnerability-disclosure.yml
   - type: DomainSecurity
