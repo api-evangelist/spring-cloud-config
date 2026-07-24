@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Spring Cloud Config Server Configuration Resources API
+  description: Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.
+  version: 4.1.0
+  contact:
+    name: Spring Cloud
+    url: https://spring.io/projects/spring-cloud-config
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8888
+  description: Local Config Server
+- url: http://{config_host}:{port}
+  description: Custom Config Server
+  variables:
+    config_host:
+      default: localhost
+    port:
+      default: '8888'
+security:
+- BasicAuth: []
+- BearerAuth: []
+tags:
+- name: Resources
+  description: Fetch resource files from the config repository
+paths:
+  /{application}/{profile}/{label}/{path}:
+    get:
+      operationId: getResourceFile
+      summary: Get a resource file
+      description: Serves a plain text resource file from the configuration repository (e.g., nginx.conf, logback.xml). The path is resolved relative to the repository root for the specified label.
+      tags:
+      - Resources
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: label
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Path to the resource file in the repository
+      responses:
+        '200':
+          description: Resource file content
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Resource not found
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer

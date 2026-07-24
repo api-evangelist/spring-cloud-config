@@ -1,0 +1,100 @@
+openapi: 3.1.0
+info:
+  title: Spring Cloud Config Server Configuration Encryption API
+  description: Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.
+  version: 4.1.0
+  contact:
+    name: Spring Cloud
+    url: https://spring.io/projects/spring-cloud-config
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8888
+  description: Local Config Server
+- url: http://{config_host}:{port}
+  description: Custom Config Server
+  variables:
+    config_host:
+      default: localhost
+    port:
+      default: '8888'
+security:
+- BasicAuth: []
+- BearerAuth: []
+tags:
+- name: Encryption
+  description: Encrypt and decrypt configuration values
+paths:
+  /encrypt:
+    post:
+      operationId: encrypt
+      summary: Encrypt a value
+      description: Encrypts a plain text value using the server's configured encryption key. Requires spring.cloud.config.server.encrypt.enabled=true.
+      tags:
+      - Encryption
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Encrypted value
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Encryption key not configured
+  /decrypt:
+    post:
+      operationId: decrypt
+      summary: Decrypt a value
+      description: Decrypts a cipher text value using the server's configured encryption key.
+      tags:
+      - Encryption
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Decrypted value
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Encryption key not configured
+  /encrypt/status:
+    get:
+      operationId: encryptionStatus
+      summary: Check encryption status
+      description: Returns the status of the encryption configuration.
+      tags:
+      - Encryption
+      responses:
+        '200':
+          description: Encryption status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - OK
+                    - NO_KEY
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer

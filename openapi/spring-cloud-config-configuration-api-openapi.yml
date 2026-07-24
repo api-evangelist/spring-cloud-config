@@ -1,0 +1,301 @@
+openapi: 3.1.0
+info:
+  title: Spring Cloud Config Server Configuration API
+  description: Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.
+  version: 4.1.0
+  contact:
+    name: Spring Cloud
+    url: https://spring.io/projects/spring-cloud-config
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8888
+  description: Local Config Server
+- url: http://{config_host}:{port}
+  description: Custom Config Server
+  variables:
+    config_host:
+      default: localhost
+    port:
+      default: '8888'
+security:
+- BasicAuth: []
+- BearerAuth: []
+tags:
+- name: Configuration
+  description: Fetch application configuration
+paths:
+  /{application}/{profile}:
+    get:
+      operationId: getEnvironment
+      summary: Get environment configuration
+      description: Returns the Environment object containing property sources for the given application and profile. Uses the default label (usually master/main).
+      tags:
+      - Configuration
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Application name
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Active profile(s), comma-separated
+      responses:
+        '200':
+          description: Environment configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+  /{application}/{profile}/{label}:
+    get:
+      operationId: getEnvironmentWithLabel
+      summary: Get environment configuration with label
+      description: Returns the Environment for the given application, profile, and label. Label typically corresponds to a git branch, tag, or commit hash.
+      tags:
+      - Configuration
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Application name
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Active profile(s), comma-separated
+      - name: label
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Branch, tag, or commit hash
+      responses:
+        '200':
+          description: Environment configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+  /{application}-{profile}.yml:
+    get:
+      operationId: getConfigYaml
+      summary: Get configuration as YAML
+      description: Returns the configuration as a YAML document.
+      tags:
+      - Configuration
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: YAML configuration
+          content:
+            application/x-yaml:
+              schema:
+                type: string
+            text/yaml:
+              schema:
+                type: string
+  /{application}-{profile}.properties:
+    get:
+      operationId: getConfigProperties
+      summary: Get configuration as properties
+      description: Returns the configuration as a Java properties file.
+      tags:
+      - Configuration
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Properties configuration
+          content:
+            text/plain:
+              schema:
+                type: string
+  /{application}-{profile}.json:
+    get:
+      operationId: getConfigJson
+      summary: Get configuration as JSON
+      description: Returns the configuration as a JSON document.
+      tags:
+      - Configuration
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: JSON configuration
+          content:
+            application/json:
+              schema:
+                type: object
+  /{label}/{application}-{profile}.yml:
+    get:
+      operationId: getConfigYamlWithLabel
+      summary: Get configuration as YAML with label
+      description: Returns YAML configuration for a specific label (branch/tag).
+      tags:
+      - Configuration
+      parameters:
+      - name: label
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: YAML configuration
+          content:
+            application/x-yaml:
+              schema:
+                type: string
+  /{label}/{application}-{profile}.properties:
+    get:
+      operationId: getConfigPropertiesWithLabel
+      summary: Get configuration as properties with label
+      description: Returns properties configuration for a specific label.
+      tags:
+      - Configuration
+      parameters:
+      - name: label
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Properties configuration
+          content:
+            text/plain:
+              schema:
+                type: string
+  /{label}/{application}-{profile}.json:
+    get:
+      operationId: getConfigJsonWithLabel
+      summary: Get configuration as JSON with label
+      description: Returns JSON configuration for a specific label.
+      tags:
+      - Configuration
+      parameters:
+      - name: label
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: profile
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: JSON configuration
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Environment:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Application name
+        profiles:
+          type: array
+          items:
+            type: string
+          description: Active profiles
+        label:
+          type: string
+          description: Label (branch/tag)
+          nullable: true
+        version:
+          type: string
+          description: Git commit hash or version identifier
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        propertySources:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertySource'
+    PropertySource:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Source identifier (e.g., git URL + path)
+        source:
+          type: object
+          additionalProperties: true
+          description: Key-value configuration properties
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer

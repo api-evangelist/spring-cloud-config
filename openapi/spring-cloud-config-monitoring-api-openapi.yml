@@ -1,0 +1,64 @@
+openapi: 3.1.0
+info:
+  title: Spring Cloud Config Server Configuration Monitoring API
+  description: Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.
+  version: 4.1.0
+  contact:
+    name: Spring Cloud
+    url: https://spring.io/projects/spring-cloud-config
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8888
+  description: Local Config Server
+- url: http://{config_host}:{port}
+  description: Custom Config Server
+  variables:
+    config_host:
+      default: localhost
+    port:
+      default: '8888'
+security:
+- BasicAuth: []
+- BearerAuth: []
+tags:
+- name: Monitoring
+  description: Webhook and monitoring endpoints
+paths:
+  /monitor:
+    post:
+      operationId: triggerRefresh
+      summary: Trigger configuration refresh notification
+      description: Accepts webhook notifications from git hosting providers (GitHub, GitLab, Bitbucket) and triggers a Spring Cloud Bus refresh event.
+      tags:
+      - Monitoring
+      parameters:
+      - name: path
+        in: query
+        schema:
+          type: string
+        description: File path pattern to match
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Refresh notification accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                description: List of applications to refresh
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer
