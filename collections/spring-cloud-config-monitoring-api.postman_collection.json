@@ -1,0 +1,156 @@
+{
+  "item": [
+    {
+      "id": "c347c34f-c63e-48d6-9788-574ec5579596",
+      "name": "Monitoring",
+      "description": {
+        "content": "Webhook and monitoring endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c9feb2c-249f-4c21-bceb-fe9753a44c02",
+          "name": "Trigger configuration refresh notification",
+          "request": {
+            "name": "Trigger configuration refresh notification",
+            "description": {
+              "content": "Accepts webhook notifications from git hosting providers (GitHub, GitLab, Bitbucket) and triggers a Spring Cloud Bus refresh event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "File path pattern to match"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bdfa381b-5479-40c3-b2d3-8bee1d3e9f69",
+              "name": "Refresh notification accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8888",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "20813ef1-0923-45b8-a5cf-e9b19b1a1b26",
+    "name": "Spring Cloud Config Server Configuration Monitoring API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.\n\nContact Support:\n Name: Spring Cloud",
+      "type": "text/plain"
+    }
+  }
+}

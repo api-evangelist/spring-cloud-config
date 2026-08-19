@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Spring Cloud Config Server Configuration Encryption API",
+    "version": "4.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Encryption",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Encrypt a value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8888/encrypt"
+          },
+          "docs": "Encrypts a plain text value using the server's configured encryption key. Requires spring.cloud.config.server.encrypt.enabled=true."
+        },
+        {
+          "info": {
+            "name": "Decrypt a value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8888/decrypt"
+          },
+          "docs": "Decrypts a cipher text value using the server's configured encryption key."
+        },
+        {
+          "info": {
+            "name": "Check encryption status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8888/encrypt/status"
+          },
+          "docs": "Returns the status of the encryption configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
