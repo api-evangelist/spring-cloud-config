@@ -28,7 +28,7 @@ accessModel:
   - plans
   - authentication
   - security
-  generated: '2026-08-26'
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/spring-cloud-config.png
 url: https://spring.io/projects/spring-cloud-config
