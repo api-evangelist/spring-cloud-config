@@ -1,10 +1,7 @@
 {
   "provider": "spring-cloud-config",
   "sources": [
-    "spring-cloud-config-configuration-api-openapi.yml",
-    "spring-cloud-config-encryption-api-openapi.yml",
-    "spring-cloud-config-monitoring-api-openapi.yml",
-    "spring-cloud-config-resources-api-openapi.yml"
+    "_original/spring-cloud-config-server-api.yml"
   ],
   "outputs": [
     "spring-cloud-config-configuration-api-openapi.yml",
@@ -16,11 +13,14 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "spring-cloud-config-configuration-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "spring-cloud-config-encryption-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "spring-cloud-config-monitoring-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "spring-cloud-config-resources-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "spring-cloud-config-server-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "spring-cloud-config-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-cloud-config-encryption-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-cloud-config-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-cloud-config-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

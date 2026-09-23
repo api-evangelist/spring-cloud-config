@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Spring Cloud Config Server Configuration Resources API
+  title: Spring Cloud Config Server Resources API
   description: Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.
   version: 4.1.0
   contact:
