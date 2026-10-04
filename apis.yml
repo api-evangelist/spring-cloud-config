@@ -140,6 +140,9 @@ apis:
   - type: SpectralRules
     url: rules/spring-cloud-config-rules.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/spring-cloud-config-capability-edges.yml
+    name: Spring Cloud Config Business Capability Map
   - type: AgenticAccess
     url: agentic-access/spring-cloud-config-agentic-access.yml
   - type: VulnerabilityDisclosure
