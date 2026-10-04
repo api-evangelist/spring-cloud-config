@@ -256,6 +256,16 @@ paths:
                 type: object
 components:
   schemas:
+    PropertySource:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Source identifier (e.g., git URL + path)
+        source:
+          type: object
+          additionalProperties: true
+          description: Key-value configuration properties
     Environment:
       type: object
       properties:
@@ -282,16 +292,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PropertySource'
-    PropertySource:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Source identifier (e.g., git URL + path)
-        source:
-          type: object
-          additionalProperties: true
-          description: Key-value configuration properties
   securitySchemes:
     BasicAuth:
       type: http
