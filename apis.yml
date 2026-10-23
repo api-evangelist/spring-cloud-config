@@ -140,6 +140,8 @@ apis:
   - type: SpectralRules
     url: rules/spring-cloud-config-rules.yml
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/spring-cloud-config/overview
   - type: Plans
     url: plans/spring-cloud-config-plans-pricing.yml
   - type: RateLimits
