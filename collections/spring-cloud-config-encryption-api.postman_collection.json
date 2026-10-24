@@ -1,365 +1,376 @@
 {
+  "info": {
+    "_postman_id": "02acdac4-2b1c-4068-92a5-ded36c1ce852",
+    "name": "Spring Cloud Config Server Encryption API",
+    "description": "Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.\n\nContact Support:\n Name: Spring Cloud",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:17:11.000Z",
+    "updatedAt": "2026-10-22T01:17:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-02acdac4-2b1c-4068-92a5-ded36c1ce852"
+  },
   "item": [
     {
-      "id": "f34bea79-b3e1-42e6-aee4-31c261e9b003",
-      "name": "Encryption",
-      "description": {
-        "content": "Encrypt and decrypt configuration values",
-        "type": "text/plain"
-      },
+      "name": "encrypt",
       "item": [
         {
-          "id": "9e94638b-85f9-4dae-ab7b-108d9e1fafda",
-          "name": "Encrypt a value",
-          "request": {
-            "name": "Encrypt a value",
-            "description": {
-              "content": "Encrypts a plain text value using the server's configured encryption key. Requires spring.cloud.config.server.encrypt.enabled=true.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "encrypt"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "text/plain"
-              },
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "<string>"
-            }
-          },
-          "response": [
+          "name": "status",
+          "item": [
             {
-              "id": "6df76ec3-77f7-419e-b14c-1c981d9d618b",
-              "name": "Encrypted value",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "encrypt"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<string>"
-                }
+              "name": "Check encryption status",
+              "id": "6e6c2b65-72e6-496a-b6d0-cc5b4c44cb0b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "bb7eef82-a640-440b-bbd4-0853c963b904",
-              "name": "Encryption key not configured",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "encrypt"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<string>"
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3e9b4242-f22d-4a2a-8a9b-4b6d260b9907",
-          "name": "Decrypt a value",
-          "request": {
-            "name": "Decrypt a value",
-            "description": {
-              "content": "Decrypts a cipher text value using the server's configured encryption key.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "decrypt"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "text/plain"
-              },
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "<string>"
-            }
-          },
-          "response": [
-            {
-              "id": "43536a4d-43fd-4db8-a779-019006f78aec",
-              "name": "Decrypted value",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "decrypt"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<string>"
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "468df953-258a-4ec1-8925-33c5d25afc69",
-              "name": "Encryption key not configured",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "decrypt"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<string>"
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1ef23b37-0ead-42a5-8888-f538108dd8c5",
-          "name": "Check encryption status",
-          "request": {
-            "name": "Check encryption status",
-            "description": {
-              "content": "Returns the status of the encryption configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "encrypt",
-                "status"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b1572bfa-ef34-4456-9f3b-4a4bb18669f0",
-              "name": "Encryption status",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "encrypt",
-                    "status"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/encrypt/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "encrypt",
+                    "status"
+                  ]
+                },
+                "description": "Returns the status of the encryption configuration."
+              },
+              "response": [
+                {
+                  "id": "952a7e2e-08e6-422a-a02d-999dce31364b",
+                  "name": "Encryption status",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/encrypt/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "encrypt",
+                        "status"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"OK\"\n}",
+                  "createdAt": "2026-10-22T01:17:11.000Z",
+                  "updatedAt": "2026-10-22T01:17:11.000Z",
+                  "uid": "35240-952a7e2e-08e6-422a-a02d-999dce31364b"
+                }
+              ],
+              "createdAt": "2026-10-22T01:17:11.000Z",
+              "updatedAt": "2026-10-22T01:17:11.000Z",
+              "uid": "35240-6e6c2b65-72e6-496a-b6d0-cc5b4c44cb0b"
+            }
+          ],
+          "id": "fdf1a2e0-9ad7-413e-bdea-111d12f40ec2",
+          "createdAt": "2026-10-22T01:17:11.000Z",
+          "updatedAt": "2026-10-22T01:17:11.000Z",
+          "uid": "35240-fdf1a2e0-9ad7-413e-bdea-111d12f40ec2"
+        },
+        {
+          "name": "Encrypt a value",
+          "id": "7153e01d-10ed-4b3b-a771-39b8ba11cc34",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/encrypt",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "encrypt"
+              ]
+            },
+            "description": "Encrypts a plain text value using the server's configured encryption key. Requires spring.cloud.config.server.encrypt.enabled=true."
+          },
+          "response": [
+            {
+              "id": "0693df0d-c176-4df4-b301-cd00c74cc68e",
+              "name": "Encrypted value",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/encrypt",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "encrypt"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "text",
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "application/json"
+                  "value": "text/plain"
                 }
               ],
-              "body": "{\n  \"status\": \"OK\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "<string>",
+              "createdAt": "2026-10-22T01:17:11.000Z",
+              "updatedAt": "2026-10-22T01:17:11.000Z",
+              "uid": "35240-0693df0d-c176-4df4-b301-cd00c74cc68e"
+            },
+            {
+              "id": "c9d9d2f0-5f6b-41a6-bec1-78630b347f92",
+              "name": "Encryption key not configured",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/encrypt",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "encrypt"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:17:11.000Z",
+              "updatedAt": "2026-10-22T01:17:11.000Z",
+              "uid": "35240-c9d9d2f0-5f6b-41a6-bec1-78630b347f92"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:17:11.000Z",
+          "updatedAt": "2026-10-22T01:17:11.000Z",
+          "uid": "35240-7153e01d-10ed-4b3b-a771-39b8ba11cc34"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
+      "id": "5a339803-ce7a-4cf5-8e48-f7328cfa7b09",
+      "createdAt": "2026-10-22T01:17:11.000Z",
+      "updatedAt": "2026-10-22T01:17:11.000Z",
+      "uid": "35240-5a339803-ce7a-4cf5-8e48-f7328cfa7b09"
+    },
     {
-      "type": "string",
-      "value": "http://localhost:8888",
-      "key": "baseUrl"
+      "name": "decrypt",
+      "item": [
+        {
+          "name": "Decrypt a value",
+          "id": "2e16244e-8ebc-44b6-ab27-68ae275a335d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/decrypt",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "decrypt"
+              ]
+            },
+            "description": "Decrypts a cipher text value using the server's configured encryption key."
+          },
+          "response": [
+            {
+              "id": "dd86c223-fd93-4251-869b-59865f9a29d9",
+              "name": "Decrypted value",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/decrypt",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "decrypt"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<string>",
+              "createdAt": "2026-10-22T01:17:11.000Z",
+              "updatedAt": "2026-10-22T01:17:11.000Z",
+              "uid": "35240-dd86c223-fd93-4251-869b-59865f9a29d9"
+            },
+            {
+              "id": "e8bc52bc-acdc-4dc1-b8d3-6d5dd5b0ba9f",
+              "name": "Encryption key not configured",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/decrypt",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "decrypt"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:17:11.000Z",
+              "updatedAt": "2026-10-22T01:17:11.000Z",
+              "uid": "35240-e8bc52bc-acdc-4dc1-b8d3-6d5dd5b0ba9f"
+            }
+          ],
+          "createdAt": "2026-10-22T01:17:11.000Z",
+          "updatedAt": "2026-10-22T01:17:11.000Z",
+          "uid": "35240-2e16244e-8ebc-44b6-ab27-68ae275a335d"
+        }
+      ],
+      "id": "8977e177-ca72-4433-8587-fce238479931",
+      "createdAt": "2026-10-22T01:17:11.000Z",
+      "updatedAt": "2026-10-22T01:17:11.000Z",
+      "uid": "35240-8977e177-ca72-4433-8587-fce238479931"
     }
   ],
   "auth": {
@@ -367,21 +378,20 @@
     "basic": [
       {
         "key": "username",
-        "value": "{{basicAuthUsername}}"
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
       },
       {
         "key": "password",
-        "value": "{{basicAuthPassword}}"
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "1c1c5c44-cb18-491c-8f71-62b187db457b",
-    "name": "Spring Cloud Config Server Configuration Encryption API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.\n\nContact Support:\n Name: Spring Cloud",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8888"
     }
-  }
+  ]
 }

@@ -1,801 +1,792 @@
 {
+  "info": {
+    "_postman_id": "e126fb36-ec10-4e57-91a2-5cadd05d48c1",
+    "name": "Spring Cloud Config Server Configuration API",
+    "description": "Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.\n\nContact Support:\n Name: Spring Cloud",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:17:04.000Z",
+    "updatedAt": "2026-10-22T01:17:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e126fb36-ec10-4e57-91a2-5cadd05d48c1"
+  },
   "item": [
     {
-      "id": "f3bd1a1c-6bd2-4ef2-8843-8dba5d2a9670",
-      "name": "Configuration",
-      "description": {
-        "content": "Fetch application configuration",
-        "type": "text/plain"
-      },
+      "name": "{application}",
       "item": [
         {
-          "id": "82fff2d9-9383-470d-acfb-88b5ab1e3b78",
-          "name": "Get environment configuration",
-          "request": {
-            "name": "Get environment configuration",
-            "description": {
-              "content": "Returns the Environment object containing property sources for the given application and profile. Uses the default label (usually master/main).",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":application",
-                ":profile"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "application",
-                  "description": "(Required) Application name"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "profile",
-                  "description": "(Required) Active profile(s), comma-separated"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{profile}",
+          "item": [
             {
-              "id": "ba62a824-12d9-4fa7-910a-8b12a85734cb",
-              "name": "Environment configuration",
-              "originalRequest": {
+              "name": "{label}",
+              "item": [
+                {
+                  "name": "Get environment configuration with label",
+                  "id": "48604800-e155-4c10-a07b-2372494987db",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:application/:profile/:label",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":application",
+                        ":profile",
+                        ":label"
+                      ],
+                      "variable": [
+                        {
+                          "id": "af33b00b-7739-4d72-83e8-2993dd355761",
+                          "key": "application",
+                          "value": "<string>",
+                          "description": "(Required) Application name"
+                        },
+                        {
+                          "id": "bb77605d-9fdb-4161-9123-f165aed7b63b",
+                          "key": "profile",
+                          "value": "<string>",
+                          "description": "(Required) Active profile(s), comma-separated"
+                        },
+                        {
+                          "id": "5e78d424-f54f-4138-8523-9d70423df7cc",
+                          "key": "label",
+                          "value": "<string>",
+                          "description": "(Required) Branch, tag, or commit hash"
+                        }
+                      ]
+                    },
+                    "description": "Returns the Environment for the given application, profile, and label. Label typically corresponds to a git branch, tag, or commit hash."
+                  },
+                  "response": [
+                    {
+                      "id": "f4150ee6-e6b3-4b59-8574-520a12706551",
+                      "name": "Environment configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:application/:profile/:label",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":application",
+                            ":profile",
+                            ":label"
+                          ],
+                          "variable": [
+                            {
+                              "key": "application"
+                            },
+                            {
+                              "key": "profile"
+                            },
+                            {
+                              "key": "label"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"profiles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"label\": \"<string>\",\n  \"version\": \"<string>\",\n  \"state\": \"<string>\",\n  \"propertySources\": [\n    {\n      \"name\": \"<string>\",\n      \"source\": {\n        \"non3\": true,\n        \"sed_a\": -4692744\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"source\": {\n        \"consecteture79\": 62046980.95350808\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T01:17:05.000Z",
+                      "updatedAt": "2026-10-22T01:17:05.000Z",
+                      "uid": "35240-f4150ee6-e6b3-4b59-8574-520a12706551"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:17:04.000Z",
+                  "updatedAt": "2026-10-22T01:17:04.000Z",
+                  "uid": "35240-48604800-e155-4c10-a07b-2372494987db"
+                }
+              ],
+              "id": "ed90f541-a307-4600-b8ef-b75e6741062c",
+              "createdAt": "2026-10-22T01:17:04.000Z",
+              "updatedAt": "2026-10-22T01:17:04.000Z",
+              "uid": "35240-ed90f541-a307-4600-b8ef-b75e6741062c"
+            },
+            {
+              "name": "Get environment configuration",
+              "id": "27ef76f4-93d6-43d4-8f48-ac2a05839d3b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/:application/:profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     ":application",
                     ":profile"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "715b9a39-21c6-45e1-9ca9-e95a5a8cd148",
                       "key": "application",
+                      "value": "<string>",
                       "description": "(Required) Application name"
                     },
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "ebdf7f6c-58c0-45ba-b780-56195e642a04",
                       "key": "profile",
+                      "value": "<string>",
                       "description": "(Required) Active profile(s), comma-separated"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns the Environment object containing property sources for the given application and profile. Uses the default label (usually master/main)."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"profiles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"label\": \"string\",\n  \"version\": \"string\",\n  \"state\": \"string\",\n  \"propertySources\": [\n    {\n      \"name\": \"string\",\n      \"source\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": \"string\"\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"source\": {\n        \"key_0\": 2008.7612213094642\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c448d846-cadf-4d94-ae93-08e520992c59",
-          "name": "Get environment configuration with label",
-          "request": {
-            "name": "Get environment configuration with label",
-            "description": {
-              "content": "Returns the Environment for the given application, profile, and label. Label typically corresponds to a git branch, tag, or commit hash.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":application",
-                ":profile",
-                ":label"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "application",
-                  "description": "(Required) Application name"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "profile",
-                  "description": "(Required) Active profile(s), comma-separated"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "label",
-                  "description": "(Required) Branch, tag, or commit hash"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4cda1c7f-c061-4ed7-9579-1f8829272ea0",
-              "name": "Environment configuration",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":application",
-                    ":profile",
-                    ":label"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "application",
-                      "description": "(Required) Application name"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "profile",
-                      "description": "(Required) Active profile(s), comma-separated"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "label",
-                      "description": "(Required) Branch, tag, or commit hash"
+                  "id": "f271a83a-9bed-417c-b568-6715b7aea848",
+                  "name": "Environment configuration",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:application/:profile",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":application",
+                        ":profile"
+                      ],
+                      "variable": [
+                        {
+                          "key": "application"
+                        },
+                        {
+                          "key": "profile"
+                        }
+                      ]
                     }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"profiles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"label\": \"string\",\n  \"version\": \"string\",\n  \"state\": \"string\",\n  \"propertySources\": [\n    {\n      \"name\": \"string\",\n      \"source\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": \"string\"\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"source\": {\n        \"key_0\": 2008.7612213094642\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f0ab4af7-8bb6-4b5b-ab9a-9f60c215026d",
-          "name": "Get configuration as YAML",
-          "request": {
-            "name": "Get configuration as YAML",
-            "description": {
-              "content": "Returns the configuration as a YAML document.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "{{application}}-{{profile}}.yml"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/x-yaml"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "e4ab1cb1-e8dc-48c0-b4f9-fa7294b1fa33",
-              "name": "YAML configuration",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "{{application}}-{{profile}}.yml"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/x-yaml"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/x-yaml"
-                }
-              ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f774fb55-d920-4d15-9113-3d16e298afde",
-          "name": "Get configuration as properties",
-          "request": {
-            "name": "Get configuration as properties",
-            "description": {
-              "content": "Returns the configuration as a Java properties file.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "{{application}}-{{profile}}.properties"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8aa91667-aa60-45f5-b08c-4deda686b838",
-              "name": "Properties configuration",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "{{application}}-{{profile}}.properties"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7c40289c-c57d-4567-8af4-8b7981912a8b",
-          "name": "Get configuration as JSON",
-          "request": {
-            "name": "Get configuration as JSON",
-            "description": {
-              "content": "Returns the configuration as a JSON document.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "{{application}}-{{profile}}.json"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "844fd5e7-8182-4384-b49e-0ebf0bf262f6",
-              "name": "JSON configuration",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "{{application}}-{{profile}}.json"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "32ee70aa-a838-4018-ad09-f6715efa231f",
-          "name": "Get configuration as YAML with label",
-          "request": {
-            "name": "Get configuration as YAML with label",
-            "description": {
-              "content": "Returns YAML configuration for a specific label (branch/tag).",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":label",
-                "{{application}}-{{profile}}.yml"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "label",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/x-yaml"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "6e0c47e5-0f19-4240-b420-87edd4a0e1b8",
-              "name": "YAML configuration",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":label",
-                    "{{application}}-{{profile}}.yml"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "label",
-                      "description": "(Required) "
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/x-yaml"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/x-yaml"
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"profiles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"label\": \"<string>\",\n  \"version\": \"<string>\",\n  \"state\": \"<string>\",\n  \"propertySources\": [\n    {\n      \"name\": \"<string>\",\n      \"source\": {\n        \"non3\": true,\n        \"sed_a\": -4692744\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"source\": {\n        \"consecteture79\": 62046980.95350808\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:17:05.000Z",
+                  "updatedAt": "2026-10-22T01:17:05.000Z",
+                  "uid": "35240-f271a83a-9bed-417c-b568-6715b7aea848"
                 }
               ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-22T01:17:04.000Z",
+              "updatedAt": "2026-10-22T01:17:04.000Z",
+              "uid": "35240-27ef76f4-93d6-43d4-8f48-ac2a05839d3b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "49797cfd-a480-4215-8739-ffded8e7bd47",
-          "name": "Get configuration as properties with label",
-          "request": {
-            "name": "Get configuration as properties with label",
-            "description": {
-              "content": "Returns properties configuration for a specific label.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":label",
-                "{{application}}-{{profile}}.properties"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "label",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "cd84497f-fcbf-4b22-a219-f68511ad8479",
-              "name": "Properties configuration",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":label",
-                    "{{application}}-{{profile}}.properties"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "label",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8c849adc-a3c9-4394-b422-fc14bc23695b",
-          "name": "Get configuration as JSON with label",
-          "request": {
-            "name": "Get configuration as JSON with label",
-            "description": {
-              "content": "Returns JSON configuration for a specific label.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":label",
-                "{{application}}-{{profile}}.json"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "label",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d2189588-ca6e-4abb-b367-b96cd95debdf",
-              "name": "JSON configuration",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":label",
-                    "{{application}}-{{profile}}.json"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "label",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a558b868-f087-4305-bf6d-61ba1e955f8f",
+          "createdAt": "2026-10-22T01:17:04.000Z",
+          "updatedAt": "2026-10-22T01:17:04.000Z",
+          "uid": "35240-a558b868-f087-4305-bf6d-61ba1e955f8f"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://localhost:8888",
-      "key": "baseUrl"
+      "id": "6199ca93-a688-444b-b0ec-d2bed5baad95",
+      "createdAt": "2026-10-22T01:17:04.000Z",
+      "updatedAt": "2026-10-22T01:17:04.000Z",
+      "uid": "35240-6199ca93-a688-444b-b0ec-d2bed5baad95"
     },
     {
-      "disabled": false,
-      "description": {
-        "content": "(Required) ",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "<string>",
-      "key": "application"
+      "name": "{application}-{profile}.yml",
+      "item": [
+        {
+          "name": "Get configuration as YAML",
+          "id": "ece858fd-ea0f-461e-91ad-2a9a683fecee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-yaml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{application}}-{{profile}}.yml",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "{{application}}-{{profile}}.yml"
+              ]
+            },
+            "description": "Returns the configuration as a YAML document."
+          },
+          "response": [
+            {
+              "id": "616a5495-aff2-4833-8082-ee125eeb4020",
+              "name": "YAML configuration",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/x-yaml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/{{application}}-{{profile}}.yml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "{{application}}-{{profile}}.yml"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-yaml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<string>",
+              "createdAt": "2026-10-22T01:17:05.000Z",
+              "updatedAt": "2026-10-22T01:17:05.000Z",
+              "uid": "35240-616a5495-aff2-4833-8082-ee125eeb4020"
+            }
+          ],
+          "createdAt": "2026-10-22T01:17:04.000Z",
+          "updatedAt": "2026-10-22T01:17:04.000Z",
+          "uid": "35240-ece858fd-ea0f-461e-91ad-2a9a683fecee"
+        }
+      ],
+      "id": "1a5d7ea3-4eb9-4339-9b23-516effa68d78",
+      "createdAt": "2026-10-22T01:17:04.000Z",
+      "updatedAt": "2026-10-22T01:17:04.000Z",
+      "uid": "35240-1a5d7ea3-4eb9-4339-9b23-516effa68d78"
     },
     {
-      "disabled": false,
-      "description": {
-        "content": "(Required) ",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "<string>",
-      "key": "profile"
+      "name": "{application}-{profile}.properties",
+      "item": [
+        {
+          "name": "Get configuration as properties",
+          "id": "6116be92-00d5-43d0-9ca7-071481d6fb65",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{application}}-{{profile}}.properties",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "{{application}}-{{profile}}.properties"
+              ]
+            },
+            "description": "Returns the configuration as a Java properties file."
+          },
+          "response": [
+            {
+              "id": "d0a1f855-5d8e-4fbc-a0a0-65ad689de50d",
+              "name": "Properties configuration",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/{{application}}-{{profile}}.properties",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "{{application}}-{{profile}}.properties"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<string>",
+              "createdAt": "2026-10-22T01:17:05.000Z",
+              "updatedAt": "2026-10-22T01:17:05.000Z",
+              "uid": "35240-d0a1f855-5d8e-4fbc-a0a0-65ad689de50d"
+            }
+          ],
+          "createdAt": "2026-10-22T01:17:04.000Z",
+          "updatedAt": "2026-10-22T01:17:04.000Z",
+          "uid": "35240-6116be92-00d5-43d0-9ca7-071481d6fb65"
+        }
+      ],
+      "id": "deef95fd-988f-4203-a864-a00b16cb7b11",
+      "createdAt": "2026-10-22T01:17:04.000Z",
+      "updatedAt": "2026-10-22T01:17:04.000Z",
+      "uid": "35240-deef95fd-988f-4203-a864-a00b16cb7b11"
+    },
+    {
+      "name": "{application}-{profile}.json",
+      "item": [
+        {
+          "name": "Get configuration as JSON",
+          "id": "529aed79-c6b4-44f1-a420-c10c68a7939f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{application}}-{{profile}}.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "{{application}}-{{profile}}.json"
+              ]
+            },
+            "description": "Returns the configuration as a JSON document."
+          },
+          "response": [
+            {
+              "id": "3426e801-568f-4c7f-bffd-3610ca27e2a5",
+              "name": "JSON configuration",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/{{application}}-{{profile}}.json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "{{application}}-{{profile}}.json"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-10-22T01:17:05.000Z",
+              "updatedAt": "2026-10-22T01:17:05.000Z",
+              "uid": "35240-3426e801-568f-4c7f-bffd-3610ca27e2a5"
+            }
+          ],
+          "createdAt": "2026-10-22T01:17:04.000Z",
+          "updatedAt": "2026-10-22T01:17:04.000Z",
+          "uid": "35240-529aed79-c6b4-44f1-a420-c10c68a7939f"
+        }
+      ],
+      "id": "693931cf-5848-4841-a923-221246663649",
+      "createdAt": "2026-10-22T01:17:04.000Z",
+      "updatedAt": "2026-10-22T01:17:04.000Z",
+      "uid": "35240-693931cf-5848-4841-a923-221246663649"
+    },
+    {
+      "name": "{label}",
+      "item": [
+        {
+          "name": "{application}-{profile}.yml",
+          "item": [
+            {
+              "name": "Get configuration as YAML with label",
+              "id": "bd8438a8-f06b-4b26-a55e-5cfc16d92904",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/x-yaml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:label/{{application}}-{{profile}}.yml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":label",
+                    "{{application}}-{{profile}}.yml"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0465a0d5-f755-46c1-b052-372c04348cce",
+                      "key": "label",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns YAML configuration for a specific label (branch/tag)."
+              },
+              "response": [
+                {
+                  "id": "f552f42a-c29a-4d48-a7f8-fda480cc21d6",
+                  "name": "YAML configuration",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/x-yaml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:label/{{application}}-{{profile}}.yml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":label",
+                        "{{application}}-{{profile}}.yml"
+                      ],
+                      "variable": [
+                        {
+                          "key": "label"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/x-yaml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-10-22T01:17:05.000Z",
+                  "updatedAt": "2026-10-22T01:17:05.000Z",
+                  "uid": "35240-f552f42a-c29a-4d48-a7f8-fda480cc21d6"
+                }
+              ],
+              "createdAt": "2026-10-22T01:17:04.000Z",
+              "updatedAt": "2026-10-22T01:17:04.000Z",
+              "uid": "35240-bd8438a8-f06b-4b26-a55e-5cfc16d92904"
+            }
+          ],
+          "id": "520d7bc1-633b-4796-8fe3-7619c20920b2",
+          "createdAt": "2026-10-22T01:17:04.000Z",
+          "updatedAt": "2026-10-22T01:17:04.000Z",
+          "uid": "35240-520d7bc1-633b-4796-8fe3-7619c20920b2"
+        },
+        {
+          "name": "{application}-{profile}.properties",
+          "item": [
+            {
+              "name": "Get configuration as properties with label",
+              "id": "26f5b200-2e36-4069-89d1-bb6aab6a24c1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:label/{{application}}-{{profile}}.properties",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":label",
+                    "{{application}}-{{profile}}.properties"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d64bee4f-09e8-4b8a-a612-768b33c5448d",
+                      "key": "label",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns properties configuration for a specific label."
+              },
+              "response": [
+                {
+                  "id": "6701cb56-17c7-4d16-8ee7-fed6578104c5",
+                  "name": "Properties configuration",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:label/{{application}}-{{profile}}.properties",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":label",
+                        "{{application}}-{{profile}}.properties"
+                      ],
+                      "variable": [
+                        {
+                          "key": "label"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-10-22T01:17:05.000Z",
+                  "updatedAt": "2026-10-22T01:17:05.000Z",
+                  "uid": "35240-6701cb56-17c7-4d16-8ee7-fed6578104c5"
+                }
+              ],
+              "createdAt": "2026-10-22T01:17:04.000Z",
+              "updatedAt": "2026-10-22T01:17:04.000Z",
+              "uid": "35240-26f5b200-2e36-4069-89d1-bb6aab6a24c1"
+            }
+          ],
+          "id": "046feae7-ca9b-4e6f-9f2a-0a3e7c498374",
+          "createdAt": "2026-10-22T01:17:04.000Z",
+          "updatedAt": "2026-10-22T01:17:04.000Z",
+          "uid": "35240-046feae7-ca9b-4e6f-9f2a-0a3e7c498374"
+        },
+        {
+          "name": "{application}-{profile}.json",
+          "item": [
+            {
+              "name": "Get configuration as JSON with label",
+              "id": "347a4ffb-84b9-4778-a007-20d78e24c490",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:label/{{application}}-{{profile}}.json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":label",
+                    "{{application}}-{{profile}}.json"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2c66c2d6-9e3c-481d-98a8-766990e97411",
+                      "key": "label",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns JSON configuration for a specific label."
+              },
+              "response": [
+                {
+                  "id": "0a1f58c3-23fb-4a22-ad28-fe3fd468cc20",
+                  "name": "JSON configuration",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:label/{{application}}-{{profile}}.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":label",
+                        "{{application}}-{{profile}}.json"
+                      ],
+                      "variable": [
+                        {
+                          "key": "label"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:17:05.000Z",
+                  "updatedAt": "2026-10-22T01:17:05.000Z",
+                  "uid": "35240-0a1f58c3-23fb-4a22-ad28-fe3fd468cc20"
+                }
+              ],
+              "createdAt": "2026-10-22T01:17:04.000Z",
+              "updatedAt": "2026-10-22T01:17:04.000Z",
+              "uid": "35240-347a4ffb-84b9-4778-a007-20d78e24c490"
+            }
+          ],
+          "id": "d8943a42-0967-4812-88f0-2833661e47ca",
+          "createdAt": "2026-10-22T01:17:04.000Z",
+          "updatedAt": "2026-10-22T01:17:04.000Z",
+          "uid": "35240-d8943a42-0967-4812-88f0-2833661e47ca"
+        }
+      ],
+      "id": "ebf3b181-6670-4d88-8f45-6ded94c9e9f2",
+      "createdAt": "2026-10-22T01:17:04.000Z",
+      "updatedAt": "2026-10-22T01:17:04.000Z",
+      "uid": "35240-ebf3b181-6670-4d88-8f45-6ded94c9e9f2"
     }
   ],
   "auth": {
@@ -803,21 +794,28 @@
     "basic": [
       {
         "key": "username",
-        "value": "{{basicAuthUsername}}"
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
       },
       {
         "key": "password",
-        "value": "{{basicAuthPassword}}"
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "663587aa-50f6-44df-8bd3-e188f9b17cf8",
-    "name": "Spring Cloud Config Server Configuration API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.\n\nContact Support:\n Name: Spring Cloud",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8888"
+    },
+    {
+      "key": "application",
+      "value": "<string>"
+    },
+    {
+      "key": "profile",
+      "value": "<string>"
     }
-  }
+  ]
 }

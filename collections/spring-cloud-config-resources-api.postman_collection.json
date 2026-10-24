@@ -1,236 +1,219 @@
 {
+  "info": {
+    "_postman_id": "8ee96f1d-d71e-475e-bd67-046d127c0025",
+    "name": "Spring Cloud Config Server Resources API",
+    "description": "Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.\n\nContact Support:\n Name: Spring Cloud",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:17:27.000Z",
+    "updatedAt": "2026-10-22T01:17:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8ee96f1d-d71e-475e-bd67-046d127c0025"
+  },
   "item": [
     {
-      "id": "162d3bfd-0a0b-4e97-984e-3e2701497498",
-      "name": "Resources",
-      "description": {
-        "content": "Fetch resource files from the config repository",
-        "type": "text/plain"
-      },
+      "name": "{application}",
       "item": [
         {
-          "id": "a82b3769-eb2e-45ff-83d5-4c55727470a6",
-          "name": "Get a resource file",
-          "request": {
-            "name": "Get a resource file",
-            "description": {
-              "content": "Serves a plain text resource file from the configuration repository (e.g., nginx.conf, logback.xml). The path is resolved relative to the repository root for the specified label.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":application",
-                ":profile",
-                ":label",
-                ":path"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "application",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "profile",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "label",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "path",
-                  "description": "(Required) Path to the resource file in the repository"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{profile}",
+          "item": [
             {
-              "id": "7bb54934-3ad8-437e-be50-4dab4fe71072",
-              "name": "Resource file content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":application",
-                    ":profile",
-                    ":label",
-                    ":path"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "application",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "profile",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "label",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "path",
-                      "description": "(Required) Path to the resource file in the repository"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{label}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "name": "{path}",
+                  "item": [
+                    {
+                      "name": "Get a resource file",
+                      "id": "afd5e293-751e-4db8-8a7f-69ca05b4897d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:application/:profile/:label/:path",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":application",
+                            ":profile",
+                            ":label",
+                            ":path"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c8788bca-fadb-4901-9dc2-83388785b9f0",
+                              "key": "application",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "4ffb70d2-cb48-425b-83e5-e37ff370e899",
+                              "key": "profile",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "b80c8b92-cf00-4a89-9949-fb5eecdc07d3",
+                              "key": "label",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "d8412ab0-af79-4ede-9ac5-35256da5ebb0",
+                              "key": "path",
+                              "value": "<string>",
+                              "description": "(Required) Path to the resource file in the repository"
+                            }
+                          ]
+                        },
+                        "description": "Serves a plain text resource file from the configuration repository (e.g., nginx.conf, logback.xml). The path is resolved relative to the repository root for the specified label."
+                      },
+                      "response": [
+                        {
+                          "id": "96f67f71-9a41-42a2-8c0a-186cbf9b63ae",
+                          "name": "Resource file content",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/:application/:profile/:label/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                ":application",
+                                ":profile",
+                                ":label",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "application"
+                                },
+                                {
+                                  "key": "profile"
+                                },
+                                {
+                                  "key": "label"
+                                },
+                                {
+                                  "key": "path"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-10-22T01:17:28.000Z",
+                          "updatedAt": "2026-10-22T01:17:28.000Z",
+                          "uid": "35240-96f67f71-9a41-42a2-8c0a-186cbf9b63ae"
+                        },
+                        {
+                          "id": "b4018769-b323-47bf-b158-d899c6e2b5e6",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/:application/:profile/:label/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                ":application",
+                                ":profile",
+                                ":label",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "application"
+                                },
+                                {
+                                  "key": "profile"
+                                },
+                                {
+                                  "key": "label"
+                                },
+                                {
+                                  "key": "path"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:17:28.000Z",
+                          "updatedAt": "2026-10-22T01:17:28.000Z",
+                          "uid": "35240-b4018769-b323-47bf-b158-d899c6e2b5e6"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:17:28.000Z",
+                      "updatedAt": "2026-10-22T01:17:28.000Z",
+                      "uid": "35240-afd5e293-751e-4db8-8a7f-69ca05b4897d"
+                    }
+                  ],
+                  "id": "fc85fe21-412a-4010-ba77-266cd5d51511",
+                  "createdAt": "2026-10-22T01:17:28.000Z",
+                  "updatedAt": "2026-10-22T01:17:28.000Z",
+                  "uid": "35240-fc85fe21-412a-4010-ba77-266cd5d51511"
                 }
               ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "c8b5df51-393e-4348-bd8e-7a126a839e41",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":application",
-                    ":profile",
-                    ":label",
-                    ":path"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "application",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "profile",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "label",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "path",
-                      "description": "(Required) Path to the resource file in the repository"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: basic",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Basic <credentials>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "70f6326f-bad4-41a0-984c-eaeb7d057157",
+              "createdAt": "2026-10-22T01:17:28.000Z",
+              "updatedAt": "2026-10-22T01:17:28.000Z",
+              "uid": "35240-70f6326f-bad4-41a0-984c-eaeb7d057157"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8eabb891-6fec-4d9c-b0e6-00c0728f98af",
+          "createdAt": "2026-10-22T01:17:28.000Z",
+          "updatedAt": "2026-10-22T01:17:28.000Z",
+          "uid": "35240-8eabb891-6fec-4d9c-b0e6-00c0728f98af"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://localhost:8888",
-      "key": "baseUrl"
+      "id": "a71b721f-9747-4cee-a46e-2494071a2b94",
+      "createdAt": "2026-10-22T01:17:28.000Z",
+      "updatedAt": "2026-10-22T01:17:28.000Z",
+      "uid": "35240-a71b721f-9747-4cee-a46e-2494071a2b94"
     }
   ],
   "auth": {
@@ -238,21 +221,20 @@
     "basic": [
       {
         "key": "username",
-        "value": "{{basicAuthUsername}}"
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
       },
       {
         "key": "password",
-        "value": "{{basicAuthPassword}}"
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "2c34ccec-ceff-4214-95fb-56b9edbf3041",
-    "name": "Spring Cloud Config Server Configuration Resources API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Spring Cloud Config Server provides HTTP resource-based API for external configuration. It serves property sources for applications organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and properties formats.\n\nContact Support:\n Name: Spring Cloud",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8888"
     }
-  }
+  ]
 }
