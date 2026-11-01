@@ -1,4 +1,4 @@
-# Spring Cloud Config (spring-cloud-config)
+# Spring Cloud Config
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,69 +66,163 @@
 
 Spring Cloud Config provides server-side and client-side support for externalized configuration in a distributed system. It offers a central place to manage external properties for applications across all environments, backed by Git, SVN, or filesystem repositories with support for encryption, decryption, and runtime refresh.
 
-**APIs.json:** [https://spring.io/projects/spring-cloud-config](https://spring.io/projects/spring-cloud-config)
+**Areas:** Configuration Management · Distributed Systems · Externalized Configuration · Git · Java · Microservices · Spring · Spring Cloud
 
-## Tags
+## Spring Cloud Config on APIs.io
 
-- Configuration Management
-- Distributed Systems
-- Externalized Configuration
-- Git
-- Java
-- Microservices
-- Spring
-- Spring Cloud
+Everything profiled for Spring Cloud Config is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/spring-cloud-config/](https://apis.io/providers/spring-cloud-config/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (4)
 
-- **Created:** 2026-03-26
-- **Modified:** 2026-05-19
+- [Spring Cloud Config Configuration API](https://apis.io/apis/spring-cloud-config/spring-cloud-config-configuration-api/) — Fetch application configuration
+- [Spring Cloud Config Encryption API](https://apis.io/apis/spring-cloud-config/spring-cloud-config-encryption-api/) — Encrypt and decrypt configuration values
+- [Spring Cloud Config Monitoring API](https://apis.io/apis/spring-cloud-config/spring-cloud-config-monitoring-api/) — Webhook and monitoring endpoints
+- [Spring Cloud Config Resources API](https://apis.io/apis/spring-cloud-config/spring-cloud-config-resources-api/) — Fetch resource files from the config repository
 
-## APIs
+### Published properties
 
-### Spring Cloud Config Server API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-HTTP resource-based API for external configuration management. Serves property sources organized by application name, profile, and label (git branch/tag). Supports JSON, YAML, and Java properties formats plus encryption/decryption and webhook-triggered refresh notifications.
+#### Agentic access (1)
 
-- **Human URL:** [https://spring.io/projects/spring-cloud-config](https://spring.io/projects/spring-cloud-config)
-- **Base URL:** `http://localhost:8888`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Spring Cloud Config Agentic Access](https://apis.io/agentic-access/spring-cloud-config/spring-cloud-config-agentic-access/)
 
-- Configuration
-- Configuration Management
-- Distributed Systems
-- Encryption
-- Externalized Configuration
-- Git
-- Microservices
+#### JSON Schema (2)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://docs.spring.io/spring-cloud-config/reference/server/environment-repository.html)
-- [OpenAPI](openapi/spring-cloud-config-server-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/spring-cloud-config-server-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/spring-cloud-config-server-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/spring-cloud-config-environment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/spring-cloud-config-server-configuration-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/spring-cloud-config-environment-structure.json)
-- [J S O N L D Context](json-ld/spring-cloud-config-context.jsonld)
-- [Spectral Rules](rules/spring-cloud-config-rules.yml)
+- [Spring Cloud Config Environment](https://apis.io/schemas/spring-cloud-config/spring-cloud-config-environment/)
+- [Spring Cloud Config Server Configuration](https://apis.io/schemas/spring-cloud-config/spring-cloud-config-server-configuration/)
 
-## Common Properties
+#### JSON Structure (1)
+
+Data models expressed in JSON Structure.
+
+- [Spring Cloud Config Environment Structure](https://apis.io/json-structure/spring-cloud-config/spring-cloud-config-environment-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Spring Cloud Config Context](https://apis.io/jsonld/spring-cloud-config/spring-cloud-config-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Spring Cloud Config Vocabulary](https://apis.io/vocabularies/spring-cloud-config/spring-cloud-config-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Spring Cloud Config Encrypt Value Example](https://apis.io/examples/spring-cloud-config/spring-cloud-config-encrypt-value-example/)
+- [Spring Cloud Config Get Environment Example](https://apis.io/examples/spring-cloud-config/spring-cloud-config-get-environment-example/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Spring Cloud Config Server Configuration API](https://apis.io/collections/spring-cloud-config/open-spring-cloud-config-configuration-api/)
+- [Spring Cloud Config Server Configuration Encryption API](https://apis.io/collections/spring-cloud-config/open-spring-cloud-config-encryption-api/)
+- [Spring Cloud Config Server Configuration Monitoring API](https://apis.io/collections/spring-cloud-config/open-spring-cloud-config-monitoring-api/)
+- [Spring Cloud Config Server Configuration Resources API](https://apis.io/collections/spring-cloud-config/open-spring-cloud-config-resources-api/)
+- [Spring Cloud Config Server API](https://apis.io/collections/spring-cloud-config/open-spring-cloud-config-server-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Spring Cloud Config — jsonschema rules](https://apis.io/rules/spring-cloud-config/spring-cloud-config-jsonschema-spectral-rules/)
+- [Spring Cloud Config API Rules](https://apis.io/rules/spring-cloud-config/spring-cloud-config-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Spring Cloud Config Authentication](https://apis.io/security/spring-cloud-config/spring-cloud-config-authentication/)
+- [Spring Cloud Config Domain Security](https://apis.io/security/spring-cloud-config/spring-cloud-config-domain-security/)
+- [Spring Cloud Config Vulnerability Disclosure](https://apis.io/security/spring-cloud-config/spring-cloud-config-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Spring Cloud Config Plans Pricing](https://apis.io/plans/spring-cloud-config/spring-cloud-config-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Spring Cloud Config Rate Limits](https://apis.io/rate-limits/spring-cloud-config/spring-cloud-config-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Spring Cloud Config Finops](https://apis.io/finops/spring-cloud-config/spring-cloud-config-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://spring.io/projects/spring-cloud-config)
 - [Documentation](https://docs.spring.io/spring-cloud-config/reference/)
-- [Getting Started](https://spring.io/guides/gs/centralized-configuration/)
-- [Git Hub](https://github.com/spring-cloud/spring-cloud-config)
-- [GitHub Organization](https://github.com/spring-cloud)
-- [Issues](https://github.com/spring-cloud/spring-cloud-config/issues)
-- [Releases](https://github.com/spring-cloud/spring-cloud-config/releases)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/spring-cloud-config)
-- [Maven  Repository](https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-server)
-- [Vocabulary](vocabulary/spring-cloud-config-vocabulary.yml)
+- [Getting started](https://spring.io/guides/gs/centralized-configuration/)
+- [Blog](https://spring.io/blog.atom)
+- [GitHub](https://github.com/spring-cloud)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 56.9 |
+| Contract governance | 27.3 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/spring-cloud-config/](https://apis.io/providers/spring-cloud-config/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Spring Cloud Config: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/spring-cloud-config/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
